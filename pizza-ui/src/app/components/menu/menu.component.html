@@ -3,21 +3,21 @@
     <!-- This is the options for the item types -->
     <div class="card-header">
       <div class="d-flex">
-        <button class="btn btn-lg">PIZZA</button>
-        <button class="btn btn-lg">SIDES</button>
-        <button class="btn btn-lg">DRINKS</button>
+        <button (click)="getPizzas()" class="btn btn-lg">PIZZA</button>
+        <button (click)="getSides()" class="btn btn-lg">SIDES</button>
+        <button (click)="getDrinks()" class="btn btn-lg">DRINKS</button>
       </div>
     </div>
 
     <!-- This is the list of items, maybe refactor it into its own component later -->
-    <div class="row justify-content-center">
-      <div class="col-md-3 m-3" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]">
+    <div class="row justify-content-center p-5">
+      <div class="col m-5" *ngFor="let item of items">
         <div class="card">
+          <img class="card-img-top" src="{{ item.imgURL }}" />
           <div class="card-body">
-            <h2 class="card-title">THIS IS CHEESE PIZZA</h2>
-            <h4 class="card-subtitle">testing pizza</h4>
+            <h3 class="card-title">{{ item.name }}</h3>
             <p class="card-text">
-              wef ubew ubfwe uwefuwenunwefuuwen weuwe ewuufwuwe uwuewuf
+              {{ item.description }}
             </p>
             <button class="btn btn-primary">Add to Order</button>
           </div>
