@@ -1,1 +1,30 @@
-<p>menu works!</p>
+<div class="row">
+  <div id="menu" class="col m-1">
+    <!-- This is the options for the item types -->
+    <div class="card-header">
+      <div class="d-flex">
+        <button class="btn btn-lg">PIZZA</button>
+        <button class="btn btn-lg">SIDES</button>
+        <button class="btn btn-lg">DRINKS</button>
+      </div>
+    </div>
+
+    <!-- This is the list of items, maybe refactor it into its own component later -->
+    <div class="row justify-content-center">
+      <div class="col-md-3 m-3" *ngFor="let i of [1, 2, 3, 4, 5, 6, 7]">
+        <div class="card">
+          <div class="card-body">
+            <h2 class="card-title">THIS IS CHEESE PIZZA</h2>
+            <h4 class="card-subtitle">testing pizza</h4>
+            <p class="card-text">
+              wef ubew ubfwe uwefuwenunwefuuwen weuwe ewuufwuwe uwuewuf
+            </p>
+            <button class="btn btn-primary">Add to Order</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- This is the list of items in an order, maybe refactor it into its own component later -->
+  <div class="col ml-3 mr-5" id="my-order">My Order</div>
+</div>

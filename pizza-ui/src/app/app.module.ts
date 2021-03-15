@@ -9,9 +9,22 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FavoritePizzasComponent } from './components/favorite-pizzas/favorite-pizzas.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { PizzaComponent } from './components/menu/pizza/pizza.component';
+import { SidesComponent } from './components/menu/sides/sides.component';
+import { DrinksComponent } from './components/menu/drinks/drinks.component';
+import { MenuNavComponent } from './components/menu/menu-nav/menu-nav.component';
 
 const appRoutes: Routes = [
-  { path: 'menu', component: MenuComponent },
+  { path: '', component: MenuComponent },
+  {
+    path: 'menu',
+    component: MenuComponent,
+    children: [
+      { path: 'pizza', component: PizzaComponent },
+      { path: 'sides', component: SidesComponent },
+      { path: 'drinks', component: DrinksComponent },
+    ],
+  },
   { path: 'my-orders', component: OrdersComponent },
   { path: 'favorite-pizzas', component: FavoritePizzasComponent },
   { path: '**', component: NotFoundComponent },
@@ -25,6 +38,10 @@ const appRoutes: Routes = [
     FavoritePizzasComponent,
     NavComponent,
     NotFoundComponent,
+    PizzaComponent,
+    SidesComponent,
+    DrinksComponent,
+    MenuNavComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
   providers: [],
