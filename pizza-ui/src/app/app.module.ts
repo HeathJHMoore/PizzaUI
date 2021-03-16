@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -12,8 +12,10 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PizzaComponent } from './components/menu/pizza/pizza.component';
 import { SidesComponent } from './components/menu/sides/sides.component';
 import { DrinksComponent } from './components/menu/drinks/drinks.component';
-import { MenuNavComponent } from './components/menu/menu-nav/menu-nav.component';
+
 import { ItemComponent } from './components/menu/item/item.component';
+import { MyOrderComponent } from './components/menu/my-order/my-order.component';
+import { OrderItemComponent } from './components/menu/my-order/order-item/order-item.component';
 
 const appRoutes: Routes = [
   { path: '', component: MenuComponent },
@@ -42,10 +44,13 @@ const appRoutes: Routes = [
     PizzaComponent,
     SidesComponent,
     DrinksComponent,
-    MenuNavComponent,
+
     ItemComponent,
+    MyOrderComponent,
+    OrderItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [],
   bootstrap: [AppComponent],
 })

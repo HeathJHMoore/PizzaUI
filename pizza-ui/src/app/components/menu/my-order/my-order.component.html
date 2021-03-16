@@ -1,0 +1,11 @@
+<div class="card-header">MY ORDER</div>
+<ul class="list-group">
+  <li class="list-group-item" *ngFor="let item of orderItems">
+    <app-order-item [orderItem]="item"></app-order-item>
+  </li>
+</ul>
+
+<div id="order-total" class="card-footer d-flex justify-content-between">
+  <strong>Total: {{ orderTotal | currency: "USD" }}</strong>
+  <button class="btn btn-primary">Submit Order</button>
+</div>

@@ -10,5 +10,11 @@
 }
 
 #my-order {
-  border: 3px solid black;
+  padding: 0;
+}
+
+#order-total {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
 }
