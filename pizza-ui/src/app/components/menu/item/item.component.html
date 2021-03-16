@@ -1,1 +1,10 @@
-<p>item works!</p>
+<div class="card">
+  <img class="card-img-top" src="{{ foodItem.imgURL }}" />
+  <div class="card-body">
+    <h3 class="card-title">{{ foodItem.name }}</h3>
+    <p class="card-text">
+      {{ foodItem.description }}
+    </p>
+    <button class="btn btn-primary">Add to Order</button>
+  </div>
+</div>
