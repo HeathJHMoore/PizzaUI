@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   constructor(private service: MenuService) {
     this.pizzas = this.service.getPizzas();
     this.sides = this.service.getSides();
-    this.drinks = this.service.getPizzas();
+    this.drinks = this.service.getDrinks();
 
     //To initialize our menu component
     this.items = this.pizzas;
