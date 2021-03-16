@@ -13,6 +13,7 @@ import { PizzaComponent } from './components/menu/pizza/pizza.component';
 import { SidesComponent } from './components/menu/sides/sides.component';
 import { DrinksComponent } from './components/menu/drinks/drinks.component';
 import { MenuNavComponent } from './components/menu/menu-nav/menu-nav.component';
+import { ItemComponent } from './components/menu/item/item.component';
 
 const appRoutes: Routes = [
   { path: '', component: MenuComponent },
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
     SidesComponent,
     DrinksComponent,
     MenuNavComponent,
+    ItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
   providers: [],
