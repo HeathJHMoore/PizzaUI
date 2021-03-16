@@ -2,8 +2,14 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 #menu {
-  height: 80vh;
+  height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 0;
+}
 
+#item-list {
+  height: 70vh;
   overflow: hidden;
   overflow-y: scroll;
   padding: 0;
@@ -11,10 +17,19 @@
 
 #my-order {
   padding: 0;
+  //border: 1px solid black;
+  height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
 }
 
 #order-total {
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
   width: 100%;
+}
+
+#order-list {
+  overflow: hidden;
+  overflow-y: scroll;
 }

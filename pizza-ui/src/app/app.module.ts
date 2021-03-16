@@ -11,23 +11,16 @@ import { NavComponent } from './components/nav/nav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { PizzaComponent } from './components/menu/pizza/pizza.component';
 import { SidesComponent } from './components/menu/sides/sides.component';
-import { DrinksComponent } from './components/menu/drinks/drinks.component';
 
 import { ItemComponent } from './components/menu/item/item.component';
 import { MyOrderComponent } from './components/menu/my-order/my-order.component';
 import { OrderItemComponent } from './components/menu/my-order/order-item/order-item.component';
+import { MenuService } from './services/menu.service';
+import { MessengerService } from './services/messenger.service';
 
 const appRoutes: Routes = [
   { path: '', component: MenuComponent },
-  {
-    path: 'menu',
-    component: MenuComponent,
-    children: [
-      { path: 'pizza', component: PizzaComponent },
-      { path: 'sides', component: SidesComponent },
-      { path: 'drinks', component: DrinksComponent },
-    ],
-  },
+  { path: 'menu', component: MenuComponent },
   { path: 'my-orders', component: OrdersComponent },
   { path: 'favorite-pizzas', component: FavoritePizzasComponent },
   { path: '**', component: NotFoundComponent },
@@ -43,15 +36,13 @@ const appRoutes: Routes = [
     NotFoundComponent,
     PizzaComponent,
     SidesComponent,
-    DrinksComponent,
-
     ItemComponent,
     MyOrderComponent,
     OrderItemComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [MenuService, MessengerService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
