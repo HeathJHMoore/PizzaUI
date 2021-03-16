@@ -2,16 +2,25 @@
 @import "~bootstrap/dist/css/bootstrap.css";
 
 #menu {
-  height: 75vh;
+  height: 70vh;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+#item-list {
+  height: 70vh;
   overflow: hidden;
   overflow-y: scroll;
   padding: 0;
 }
 
 #my-order {
+  padding: 0;
+  //border: 1px solid black;
+  height: 70vh;
   overflow: hidden;
   overflow-y: scroll;
-  padding: 0;
 }
 
 #order-total {

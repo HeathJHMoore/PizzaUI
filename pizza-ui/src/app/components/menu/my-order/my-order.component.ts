@@ -12,6 +12,12 @@ export class MyOrderComponent implements OnInit {
   orderItems: Item[] = [];
   constructor(private message: MessengerService) {}
 
+  onSubmitOrder(orderItems) {
+    console.log(orderItems);
+    this.orderTotal = 0;
+    this.orderItems = [];
+  }
+
   ngOnInit(): void {
     this.message.getMessage().subscribe((product: Item) => {
       this.orderItems.push(product);
