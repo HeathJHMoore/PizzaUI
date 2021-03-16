@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../models/item';
+import { MessengerService } from '../../../services/messenger.service';
 
 @Component({
   selector: 'app-my-order',
@@ -8,68 +9,14 @@ import { Item } from '../../../models/item';
 })
 export class MyOrderComponent implements OnInit {
   orderTotal: number = 0;
-  orderItemNum: number = 0;
-  orderItems: Item[] = [
-    new Item(
-      1,
-      'Cheese Pizza',
-      10.5,
-      'Delicious Cheese Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Cheese.png'
-    ),
-    new Item(
-      2,
-      'Pepperoni Pizza',
-      10.5,
-      'Delicious Pepperoni Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Pepperoni.png'
-    ),
-    new Item(
-      1,
-      'Cheese Pizza',
-      10.5,
-      'Delicious Cheese Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Cheese.png'
-    ),
-    new Item(
-      2,
-      'Pepperoni Pizza',
-      10.5,
-      'Delicious Pepperoni Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Pepperoni.png'
-    ),
-    new Item(
-      1,
-      'Cheese Pizza',
-      10.5,
-      'Delicious Cheese Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Cheese.png'
-    ),
-    new Item(
-      2,
-      'Pepperoni Pizza',
-      10.5,
-      'Delicious Pepperoni Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Pepperoni.png'
-    ),
-    new Item(
-      1,
-      'Cheese Pizza',
-      10.5,
-      'Delicious Cheese Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Cheese.png'
-    ),
-    new Item(
-      2,
-      'Pepperoni Pizza',
-      10.5,
-      'Delicious Pepperoni Pizza With Tomato Sauce and a Thin Crust',
-      'https://www.pizzahut.com/assets/w/tile/thor/pizza_Pepperoni.png'
-    ),
-  ];
-  constructor() {}
+  orderItems: Item[] = [];
+  constructor(private message: MessengerService) {}
 
   ngOnInit(): void {
-    this.orderItems.forEach((item: Item) => (this.orderTotal += item.price));
+    this.message.getMessage().subscribe((product: Item) => {
+      this.orderItems.push(product);
+      this.orderTotal = 0;
+      this.orderItems.forEach((item: Item) => (this.orderTotal += item.price));
+    });
   }
 }

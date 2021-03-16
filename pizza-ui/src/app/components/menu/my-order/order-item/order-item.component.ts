@@ -8,6 +8,7 @@ import { Item } from 'src/app/models/item';
 })
 export class OrderItemComponent implements OnInit {
   @Input() orderItem: Item;
+  @Input() itemNum: number;
 
   constructor() {}
 

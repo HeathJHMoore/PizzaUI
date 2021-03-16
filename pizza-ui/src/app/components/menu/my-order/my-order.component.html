@@ -1,9 +1,17 @@
 <div class="card-header">MY ORDER</div>
-<ul class="list-group">
-  <li class="list-group-item" *ngFor="let item of orderItems">
-    <app-order-item [orderItem]="item"></app-order-item>
-  </li>
-</ul>
+<div>
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let item of orderItems; let IndexOfItem = index"
+    >
+      <app-order-item
+        [itemNum]="IndexOfItem"
+        [orderItem]="item"
+      ></app-order-item>
+    </li>
+  </ul>
+</div>
 
 <div id="order-total" class="card-footer d-flex justify-content-between">
   <strong>Total: {{ orderTotal | currency: "USD" }}</strong>

@@ -1,5 +1,5 @@
 <div class="row">
-  <div id="menu" class="col m-1">
+  <div class="col m-1 menu">
     <!-- This is the options for the item types -->
     <div class="card-header">
       <div class="d-flex">
@@ -10,7 +10,7 @@
     </div>
 
     <!-- This is the list of items, maybe refactor it into its own component later -->
-    <div class="row justify-content-center p-5">
+    <div id="menu" class="row justify-content-center p-5">
       <div class="col m-5" *ngFor="let item of items">
         <app-item [foodItem]="item"></app-item>
       </div>

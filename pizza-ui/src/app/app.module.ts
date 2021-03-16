@@ -16,6 +16,8 @@ import { DrinksComponent } from './components/menu/drinks/drinks.component';
 import { ItemComponent } from './components/menu/item/item.component';
 import { MyOrderComponent } from './components/menu/my-order/my-order.component';
 import { OrderItemComponent } from './components/menu/my-order/order-item/order-item.component';
+import { MenuService } from './services/menu.service';
+import { MessengerService } from './services/messenger.service';
 
 const appRoutes: Routes = [
   { path: '', component: MenuComponent },
@@ -51,7 +53,7 @@ const appRoutes: Routes = [
   ],
   imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [],
+  providers: [MenuService, MessengerService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
