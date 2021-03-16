@@ -8,10 +8,10 @@ import { Item } from '../../models/item';
   styleUrls: ['./menu.component.scss'],
 })
 export class MenuComponent implements OnInit {
-  items: Item[];
-  pizzas: Item[];
-  sides: Item[];
-  drinks: Item[];
+  items: Item[] = [];
+  pizzas: Item[] = [];
+  sides: Item[] = [];
+  drinks: Item[] = [];
 
   constructor(private service: MenuService) {
     this.pizzas = this.service.getPizzas();
