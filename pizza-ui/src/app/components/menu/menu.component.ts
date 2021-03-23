@@ -14,10 +14,6 @@ export class MenuComponent implements OnInit {
   drinks: Item[] = [];
 
   constructor(private service: MenuService) {
-    this.pizzas = this.service.getPizzas();
-    this.sides = this.service.getSides();
-    this.drinks = this.service.getDrinks();
-
     //To initialize our menu component
     this.items = this.pizzas;
   }
@@ -34,5 +30,18 @@ export class MenuComponent implements OnInit {
     this.items = this.drinks;
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.service.getPizzas().subscribe((pizzas) => {
+      this.pizzas = pizzas;
+      this.items = pizzas;
+    });
+
+    this.service.getSides().subscribe((sides) => {
+      this.sides = sides;
+    });
+
+    this.service.getDrinks().subscribe((drinks) => {
+      this.drinks = drinks;
+    });
+  }
 }

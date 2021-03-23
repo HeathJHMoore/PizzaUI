@@ -9,7 +9,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FavoritePizzasComponent } from './components/favorite-pizzas/favorite-pizzas.component';
 import { NavComponent } from './components/nav/nav.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { PizzaComponent } from './components/menu/pizza/pizza.component';
+
 import { SidesComponent } from './components/menu/sides/sides.component';
 
 import { ItemComponent } from './components/menu/item/item.component';
@@ -17,6 +17,7 @@ import { MyOrderComponent } from './components/menu/my-order/my-order.component'
 import { OrderItemComponent } from './components/menu/my-order/order-item/order-item.component';
 import { MenuService } from './services/menu.service';
 import { MessengerService } from './services/messenger.service';
+import { HttpClientModule } from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: MenuComponent },
@@ -34,13 +35,17 @@ const appRoutes: Routes = [
     FavoritePizzasComponent,
     NavComponent,
     NotFoundComponent,
-    PizzaComponent,
     SidesComponent,
     ItemComponent,
     MyOrderComponent,
     OrderItemComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, RouterModule.forRoot(appRoutes)],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule.forRoot(appRoutes),
+    HttpClientModule,
+  ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [MenuService, MessengerService],
   bootstrap: [AppComponent],
