@@ -4,6 +4,7 @@ export class Item {
   price: number;
   description: string;
   imgURL: string;
+  type: string;
 
   constructor(
     id = 0,

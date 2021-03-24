@@ -25,4 +25,8 @@ export class MenuService {
   getDrinks(): Observable<Item[]> {
     return this.http.get<Item[]>(this.drinkURL);
   }
+
+  postDep(val: any) {
+    this.http.post(this.baseURL + '/api/values', val).subscribe();
+  }
 }
