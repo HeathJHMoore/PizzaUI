@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Order } from '../models/order';
 import { Observable } from 'rxjs';
 import { FoodOrderPizza } from '../models/food-order-pizza';
+import { FoodOrderSide } from '../models/food-order-side';
+import { FoodOrderDrink } from '../models/food-order-drink';
 
 @Injectable({
   providedIn: 'root',
@@ -16,5 +18,13 @@ export class OrdersService {
 
   postPizzaOrder(FOP: FoodOrderPizza) {
     return this.http.post('https://localhost:44314/api/orderpizza', FOP);
+  }
+
+  postSideOrder(FOS: FoodOrderSide) {
+    return this.http.post('https://localhost:44314/api/orderside', FOS);
+  }
+
+  postDrinkOrder(FOD: FoodOrderDrink) {
+    return this.http.post('https://localhost:44314/api/orderdrink', FOD);
   }
 }

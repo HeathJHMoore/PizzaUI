@@ -2,8 +2,8 @@ export class FoodOrderPizza {
   PizzaID: number;
   OrderID: number;
 
-  constructor(PizzaID, OrderID) {
-    this.PizzaID = PizzaID;
-    this.OrderID = OrderID;
+  constructor(pizzaID, orderID) {
+    this.PizzaID = pizzaID;
+    this.OrderID = orderID;
   }
 }

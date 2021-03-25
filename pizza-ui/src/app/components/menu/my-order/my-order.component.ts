@@ -4,6 +4,8 @@ import { Order } from '../../../models/order';
 import { MessengerService } from '../../../services/messenger.service';
 import { OrdersService } from '../../../services/orders.service';
 import { FoodOrderPizza } from '../../../models/food-order-pizza';
+import { FoodOrderSide } from '../../../models/food-order-side';
+import { FoodOrderDrink } from '../../../models/food-order-drink';
 
 @Component({
   selector: 'app-my-order',
@@ -15,6 +17,8 @@ export class MyOrderComponent implements OnInit {
   orderItems: Item[] = [];
   mostRecentOrderId: number = 0;
   FoodOrderP: FoodOrderPizza;
+  FoodOrderS: FoodOrderSide;
+  FoodOrderD: FoodOrderDrink;
 
   constructor(
     private message: MessengerService,
@@ -34,9 +38,7 @@ export class MyOrderComponent implements OnInit {
     if (orderItems.length != 0) {
       //Create an Order object and get its ID
       this.orderService.postOrder().subscribe((response) => {
-        console.log(response[0].orderID);
         this.mostRecentOrderId = response[0].orderID;
-
         orderItems.forEach((item: Item) => {
           if (item.type == 'pizza') {
             this.FoodOrderP = new FoodOrderPizza(
@@ -44,6 +46,18 @@ export class MyOrderComponent implements OnInit {
               this.mostRecentOrderId
             );
             this.orderService.postPizzaOrder(this.FoodOrderP).subscribe();
+          } else if (item.type == 'side') {
+            this.FoodOrderS = new FoodOrderSide(
+              item.id,
+              this.mostRecentOrderId
+            );
+            this.orderService.postSideOrder(this.FoodOrderS).subscribe();
+          } else if (item.type == 'drink') {
+            this.FoodOrderD = new FoodOrderDrink(
+              item.id,
+              this.mostRecentOrderId
+            );
+            this.orderService.postDrinkOrder(this.FoodOrderD).subscribe();
           }
         });
       });
