@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Item } from '../models/item';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Department } from '../models/department';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +27,7 @@ export class MenuService {
     return this.http.get<Item[]>(this.drinkURL);
   }
 
-  postDep(val: any) {
-    this.http.post(this.baseURL + '/api/values', val).subscribe();
+  postDep(val: Department): Observable<Department[]> {
+    return this.http.post<Department[]>(this.baseURL + '/api/values', val);
   }
 }

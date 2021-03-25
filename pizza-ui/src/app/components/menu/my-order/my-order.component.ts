@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Item } from '../../../models/item';
+import { Order } from '../../../models/order';
 import { MessengerService } from '../../../services/messenger.service';
+import { OrdersService } from '../../../services/orders.service';
+import { FoodOrderPizza } from '../../../models/food-order-pizza';
 
 @Component({
   selector: 'app-my-order',
@@ -10,13 +13,13 @@ import { MessengerService } from '../../../services/messenger.service';
 export class MyOrderComponent implements OnInit {
   orderTotal: number = 0;
   orderItems: Item[] = [];
-  constructor(private message: MessengerService) {}
+  mostRecentOrderId: number = 0;
+  FoodOrderP: FoodOrderPizza;
 
-  onSubmitOrder(orderItems) {
-    console.log(orderItems);
-    this.orderTotal = 0;
-    this.orderItems = [];
-  }
+  constructor(
+    private message: MessengerService,
+    private orderService: OrdersService
+  ) {}
 
   ngOnInit(): void {
     this.message.getMessage().subscribe((product: Item) => {
@@ -24,5 +27,31 @@ export class MyOrderComponent implements OnInit {
       this.orderTotal = 0;
       this.orderItems.forEach((item: Item) => (this.orderTotal += item.price));
     });
+  }
+
+  onSubmitOrder(orderItems: Item[]) {
+    //Create order
+    if (orderItems.length != 0) {
+      //Create an Order object and get its ID
+      this.orderService.postOrder().subscribe((response) => {
+        console.log(response[0].orderID);
+        this.mostRecentOrderId = response[0].orderID;
+
+        orderItems.forEach((item: Item) => {
+          if (item.type == 'pizza') {
+            this.FoodOrderP = new FoodOrderPizza(
+              item.id,
+              this.mostRecentOrderId
+            );
+            this.orderService.postPizzaOrder(this.FoodOrderP).subscribe();
+          }
+        });
+      });
+
+      this.orderTotal = 0;
+      this.orderItems = [];
+    } else {
+      console.log('Your list of orders is empty!!! Buy something');
+    }
   }
 }

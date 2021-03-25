@@ -33,10 +33,14 @@ export class MenuComponent implements OnInit {
   }
 
   //REMEMBER TO GET RID OF THIS!!!!!!!!!!!!!!!!!   HEY !!!!!!!!!!!!!!!!!!!!! GET RID OF THIS !!!
+
   addDepartment() {
-    var val: Department = new Department('Clothing');
-    this.service.postDep(val);
-    console.log(val);
+    var val: Department = new Department('Teeth');
+    this.service.postDep(val).subscribe((response) => {
+      response.forEach((resp: Department) => {
+        console.log(resp.DepartmentId);
+      });
+    });
   }
 
   ngOnInit(): void {
