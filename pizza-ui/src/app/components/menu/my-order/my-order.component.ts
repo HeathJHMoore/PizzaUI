@@ -26,8 +26,8 @@ export class MyOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.message.getMessage().subscribe((product: Item) => {
-      this.orderItems.push(product);
+    this.message.getFoodItem().subscribe((foodItem: Item) => {
+      this.orderItems.push(foodItem);
       this.orderTotal = 0;
       this.orderItems.forEach((item: Item) => (this.orderTotal += item.price));
     });
@@ -39,23 +39,26 @@ export class MyOrderComponent implements OnInit {
       //Create an Order object and get its ID
       this.orderService.postOrder().subscribe((response) => {
         this.mostRecentOrderId = response[0].orderID;
-        orderItems.forEach((item: Item) => {
+        orderItems.forEach((item: Item, index) => {
           if (item.type == 'pizza') {
             this.FoodOrderP = new FoodOrderPizza(
               item.id,
-              this.mostRecentOrderId
+              this.mostRecentOrderId,
+              index
             );
             this.orderService.postPizzaOrder(this.FoodOrderP).subscribe();
           } else if (item.type == 'side') {
             this.FoodOrderS = new FoodOrderSide(
               item.id,
-              this.mostRecentOrderId
+              this.mostRecentOrderId,
+              index
             );
             this.orderService.postSideOrder(this.FoodOrderS).subscribe();
           } else if (item.type == 'drink') {
             this.FoodOrderD = new FoodOrderDrink(
               item.id,
-              this.mostRecentOrderId
+              this.mostRecentOrderId,
+              index
             );
             this.orderService.postDrinkOrder(this.FoodOrderD).subscribe();
           }

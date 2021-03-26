@@ -6,14 +6,15 @@ import { Subject } from 'rxjs';
 })
 export class MessengerService {
   subject = new Subject();
+  subject2 = new Subject();
 
   constructor() {}
 
-  sendMessage(product) {
+  sendFoodItem(product) {
     this.subject.next(product);
   }
 
-  getMessage() {
+  getFoodItem() {
     return this.subject.asObservable();
   }
 }

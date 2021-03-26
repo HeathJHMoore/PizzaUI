@@ -14,6 +14,6 @@ export class ItemComponent implements OnInit {
   ngOnInit(): void {}
 
   handleAddToCart() {
-    this.message.sendMessage(this.foodItem);
+    this.message.sendFoodItem(this.foodItem);
   }
 }

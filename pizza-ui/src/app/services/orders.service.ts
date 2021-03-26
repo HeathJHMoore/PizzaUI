@@ -27,4 +27,10 @@ export class OrdersService {
   postDrinkOrder(FOD: FoodOrderDrink) {
     return this.http.post('https://localhost:44314/api/orderdrink', FOD);
   }
+
+  getPizzaOrder(orderID: number): Observable<FoodOrderPizza[]> {
+    return this.http.get<FoodOrderPizza[]>(
+      'https://localhost:44314/api/orderpizza/' + orderID
+    );
+  }
 }
