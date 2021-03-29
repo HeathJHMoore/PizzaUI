@@ -12,6 +12,10 @@ import { FoodOrderDrink } from '../models/food-order-drink';
 export class OrdersService {
   constructor(private http: HttpClient) {}
 
+  getAllOrders(): Observable<Order[]> {
+    return this.http.get<Order[]>('https://localhost:44314/api/order');
+  }
+
   postOrder(): Observable<Order[]> {
     return this.http.post<Order[]>('https://localhost:44314/api/order', null);
   }

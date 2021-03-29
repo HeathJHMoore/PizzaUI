@@ -1,14 +1,12 @@
 <div class="card mr-4">
   <div class="card-header">Orders</div>
-  <div class="card-body" *ngFor="let i of [1, 2, 3]">
-    <div>
+  <div class="card-body" *ngFor="let order of orders">
+    <div class="card">
       <ul class="list-group">
-        <li
-          class="list-group-item"
-          *ngFor="let item of orderItems; let IndexOfItem = index"
-        >
+        <li class="card-header">Order #{{ order.orderID }}</li>
+        <li class="list-group-item" *ngFor="let item of order.orderItems">
           <app-order-item
-            [itemNum]="IndexOfItem"
+            [itemNum]="item.orderItemIndex"
             [orderItem]="item"
           ></app-order-item>
         </li>

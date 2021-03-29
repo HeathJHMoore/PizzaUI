@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../services/menu.service';
 import { Item } from '../../models/item';
 import { Department } from '../../models/department';
+import { MessengerService } from 'src/app/services/messenger.service';
 
 @Component({
   selector: 'app-menu',
@@ -14,7 +15,7 @@ export class MenuComponent implements OnInit {
   sides: Item[] = [];
   drinks: Item[] = [];
 
-  constructor(private service: MenuService) {
+  constructor(private service: MenuService, private message: MessengerService) {
     //To initialize our menu component
     this.items = this.pizzas;
   }
@@ -29,19 +30,9 @@ export class MenuComponent implements OnInit {
 
   getDrinks() {
     this.items = this.drinks;
-    this.addDepartment();
   }
 
   //REMEMBER TO GET RID OF THIS!!!!!!!!!!!!!!!!!   HEY !!!!!!!!!!!!!!!!!!!!! GET RID OF THIS !!!
-
-  addDepartment() {
-    var val: Department = new Department('Teeth');
-    this.service.postDep(val).subscribe((response) => {
-      response.forEach((resp: Department) => {
-        console.log(resp.DepartmentId);
-      });
-    });
-  }
 
   ngOnInit(): void {
     this.service.getPizzas().subscribe((pizzas) => {
