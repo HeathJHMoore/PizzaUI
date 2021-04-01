@@ -13,6 +13,7 @@ export class Item {
     price = 0,
     description = '',
     imgURL = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdzPOXKKEseCX0pFjCAioe2oymlM91NxTGyw&usqp=CAU',
+    type = '',
     orderItemIndex = 0
   ) {
     this.id = id;
@@ -20,6 +21,7 @@ export class Item {
     this.price = price;
     this.description = description;
     this.imgURL = imgURL;
+    this.type = type;
     this.orderItemIndex = orderItemIndex;
   }
 }

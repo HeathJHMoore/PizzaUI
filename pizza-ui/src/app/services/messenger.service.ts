@@ -7,7 +7,6 @@ import { Item } from 'src/app/models/item';
 })
 export class MessengerService {
   subject = new Subject();
-  subject2 = new Subject();
 
   constructor() {}
 

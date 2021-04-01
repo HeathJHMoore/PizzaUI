@@ -37,4 +37,16 @@ export class OrdersService {
       'https://localhost:44314/api/orderpizza/' + orderID
     );
   }
+
+  getSideOrder(orderID: number): Observable<FoodOrderSide[]> {
+    return this.http.get<FoodOrderSide[]>(
+      'https://localhost:44314/api/orderside/' + orderID
+    );
+  }
+
+  getDrinkOrder(orderID: number): Observable<FoodOrderDrink[]> {
+    return this.http.get<FoodOrderDrink[]>(
+      'https://localhost:44314/api/orderdrink/' + orderID
+    );
+  }
 }

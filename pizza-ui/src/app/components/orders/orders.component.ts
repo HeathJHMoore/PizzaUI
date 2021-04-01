@@ -39,8 +39,9 @@ export class OrdersComponent implements OnInit {
       });
       this.drinks = drinks;
     });
+  }
 
-    //After completion, try moving this to ngOninit
+  ngOnInit(): void {
     this.ordersService.getAllOrders().subscribe((orders) => {
       orders.forEach((order) => {
         var tempOrder = new Order(order.orderID, order.orderDate);
@@ -48,18 +49,69 @@ export class OrdersComponent implements OnInit {
         this.ordersService
           .getPizzaOrder(order.orderID)
           .subscribe((FoodOrderPizzas) => {
-            //console.log(FoodOrderPizzas);
             FoodOrderPizzas.forEach((FOP) => {
-              var item: Item;
-
-              //Get pizza item that matches the pizzaID in FoodOrderPizza object
-              item = this.pizzas.find(function (pizza): Item {
+              this.pizzas.forEach((pizza) => {
                 if (FOP.PizzaID == pizza.id) {
-                  return pizza;
+                  tempOrder.orderItems.push(
+                    new Item(
+                      pizza.id,
+                      pizza.name,
+                      pizza.price,
+                      pizza.description,
+                      pizza.imgURL,
+                      pizza.type,
+                      FOP.OrderItemIndex
+                    )
+                  );
                 }
               });
-              item.orderItemIndex = FOP.OrderItemIndex;
-              tempOrder.orderItems.push(item);
+            });
+          });
+
+        //ADD side items to orders' orderItems list
+        this.ordersService
+          .getSideOrder(order.orderID)
+          .subscribe((FoodOrderSides) => {
+            FoodOrderSides.forEach((FOS) => {
+              this.sides.forEach((side) => {
+                if (FOS.SideID == side.id) {
+                  tempOrder.orderItems.push(
+                    new Item(
+                      side.id,
+                      side.name,
+                      side.price,
+                      side.description,
+                      side.imgURL,
+                      side.type,
+                      FOS.OrderItemIndex
+                    )
+                  );
+                }
+              });
+            });
+          });
+
+        //ADD drink items to orders' orderItems list
+        this.ordersService
+          .getDrinkOrder(order.orderID)
+          .subscribe((FoodOrderDrinks) => {
+            FoodOrderDrinks.forEach((FOD) => {
+              //Get drink item that matches the drinkID in FoodOrderDrink object
+              this.drinks.forEach((drink) => {
+                if (FOD.DrinkID == drink.id) {
+                  tempOrder.orderItems.push(
+                    new Item(
+                      drink.id,
+                      drink.name,
+                      drink.price,
+                      drink.description,
+                      drink.imgURL,
+                      drink.type,
+                      FOD.OrderItemIndex
+                    )
+                  );
+                }
+              });
             });
 
             this.orders.push(tempOrder);
@@ -67,6 +119,4 @@ export class OrdersComponent implements OnInit {
       });
     });
   }
-
-  ngOnInit(): void {}
 }
