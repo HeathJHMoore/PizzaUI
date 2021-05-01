@@ -1,0 +1,40 @@
+.container-main {
+  display: flex;
+  justify-content: space-around;
+
+  height: 100vh;
+}
+
+.fb-1 {
+  flex-basis: 45%;
+}
+
+.fb-2 {
+  display: flex;
+
+  flex-basis: 45%;
+  //flex-direction: column;
+}
+
+#customization {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.radio-btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pizza-checkbox {
+  display: flex;
+  justify-content: space-between;
+}
+
+.fi {
+  // border: 10px solid black;
+  display: flex;
+  justify-content: center;
+
+  flex: 1;
+}

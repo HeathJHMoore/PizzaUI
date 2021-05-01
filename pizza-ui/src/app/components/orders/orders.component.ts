@@ -39,10 +39,12 @@ export class OrdersComponent implements OnInit {
       });
       this.drinks = drinks;
     });
-  }
 
-  ngOnInit(): void {
     this.ordersService.getAllOrders().subscribe((orders) => {
+      //console.log(orders);
+
+      //LOOP THROUGH ORDERS
+
       orders.forEach((order) => {
         var tempOrder = new Order(order.orderID, order.orderDate);
         //ADD pizza items to orders' orderItems list
@@ -117,6 +119,10 @@ export class OrdersComponent implements OnInit {
             this.orders.push(tempOrder);
           });
       });
+
+      //END OF A SINGLE ORDER'S LOOP^
     });
   }
+
+  ngOnInit(): void {}
 }

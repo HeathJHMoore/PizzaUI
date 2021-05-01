@@ -1,0 +1,133 @@
+<!-- Shows custom pizza information -->
+
+<form #f="ngForm">
+  <div class="container-main">
+    <div class="fb-1 card">
+      <div class="card-header text-center"><strong>Your Pizza</strong></div>
+    </div>
+
+    <div class="fb-2 card">
+      <div class="card-header text-center">
+        <strong>Pizza Customization</strong>
+      </div>
+      <div id="customization" class="card-body overflow-auto">
+        <!-- Form-Group for Pizza Name  -->
+        <div class="form-group">
+          <label for="pizzaName"><strong>Pizza Name</strong></label>
+          <input
+            ngModel
+            required
+            class="form-control"
+            name="firstName"
+            id="pizzaName"
+            type="text"
+            #firstName="ngModel"
+          />
+        </div>
+
+        <!-- For Pizza Size-->
+        <div id="pizzaSizes" class="card">
+          <div class="card-header text-center"><strong>Size</strong></div>
+          <div class="card-body form-group radio radio-btns">
+            <div class="fi" *ngFor="let size of pizzaSizes">
+              <label>
+                <input
+                  required
+                  ngModel
+                  class="form-control"
+                  type="radio"
+                  name="pizzaSize"
+                  [value]="size.id"
+                />
+                {{ size.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form-Group for Pizza Crust Type -->
+        <div id="pizzaCrust" class="card">
+          <div class="card-header text-center"><strong>Crust Type</strong></div>
+          <div class="card-body form-group radio radio-btns">
+            <div class="fi" *ngFor="let crust of pizzaCrusts">
+              <label>
+                <input
+                  required
+                  ngModel
+                  class="form-control"
+                  type="radio"
+                  name="pizzaCrust"
+                  [value]="crust.id"
+                />
+                {{ crust.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="pizzaCheese" class="card">
+          <div class="card-header text-center">
+            <strong>Cheese Levels</strong>
+          </div>
+          <div class="card-body form-group radio radio-btns">
+            <div *ngFor="let cheese of pizzaCheeses" class="fi">
+              <label>
+                <input
+                  required
+                  ngModel
+                  class="form-control"
+                  type="radio"
+                  name="pizzaCheese"
+                  [value]="cheese.id"
+                />
+                {{ cheese.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="pizzaMeat" class="card">
+          <div class="card-header text-center"><strong>Meats</strong></div>
+          <div class="card-body form-group checkbox pizza-checkbox">
+            <div *ngFor="let meat of pizzaMeats">
+              <label>
+                <input ngModel type="checkbox" [name]="meat.name" />
+                {{ meat.name }}
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div id="pizzaVeggie" class="card">
+          <div class="card-header text-center"><strong>Veggies</strong></div>
+          <div class="card-body form-group checkbox pizza-checkbox">
+            <div *ngFor="let veggie of pizzaVeggies">
+              <label>
+                <input ngModel type="checkbox" [name]="veggie.name" />
+                {{ veggie.name }}
+              </label>
+            </div>
+
+            <!-- <div>
+              <label>
+                <input ngModel type="checkbox" name="greenPeppers" />
+                GreenPeppers
+              </label>
+            </div> -->
+
+            <!-- <div>
+              <label>
+                <input ngModel type="checkbox" name="jalapenos" />
+                Jalapenos
+              </label>
+            </div> -->
+          </div>
+        </div>
+        <!-- <p>
+          {{f.value | json}}
+        </p> -->
+      </div>
+      <button class="btn btn-primary" [disabled]="!f.valid">Create</button>
+    </div>
+  </div>
+</form>

@@ -1,18 +1,16 @@
 <div class="card mr-4">
   <div class="card-header">Orders</div>
   <div class="card-body" *ngFor="let order of orders">
-    <div class="">
-      <ul class="list-group">
-        <div class="bg-secondary">
-          <strong>Order #{{ order.orderID }}</strong>
-        </div>
-        <li class="list-group-item" *ngFor="let item of order.orderItems">
-          <app-order-item
-            [itemNum]="item.orderItemIndex"
-            [orderItem]="item"
-          ></app-order-item>
-        </li>
-      </ul>
-    </div>
+    <ol class="list-group">
+      <div class="bg-secondary">
+        <strong>Order #{{ order.orderID }}</strong>
+      </div>
+      <li class="list-group-item" *ngFor="let item of order.orderItems">
+        <app-order-item
+          [itemNum]="item.orderItemIndex"
+          [orderItem]="item"
+        ></app-order-item>
+      </li>
+    </ol>
   </div>
 </div>
