@@ -1,9 +1,30 @@
 <!-- Shows custom pizza information -->
 
-<form #f="ngForm">
+<form #f="ngForm" (ngSumbit)="submit(f)">
   <div class="container-main">
     <div class="fb-1 card">
       <div class="card-header text-center"><strong>Your Pizza</strong></div>
+      <div class="card-body pizza-elements overflow-auto">
+        <div
+          class="pizza-element mb-2 mt-2"
+          *ngFor="let element of chosenElements"
+        >
+          <div class="pizza-element-fi">
+            <img [src]="element.imgURL" />
+          </div>
+
+          <div class="pizza-element-fi text-center">
+            {{ element.name }}
+          </div>
+
+          <div class="pizza-element-fi text-center">
+            +{{ element.price | currency: "USD" }}
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        Pizza Price: {{ pizzaPrice | currency: "USD" }}
+      </div>
     </div>
 
     <div class="fb-2 card">
@@ -18,7 +39,7 @@
             ngModel
             required
             class="form-control"
-            name="firstName"
+            name="pizzaName"
             id="pizzaName"
             type="text"
             #firstName="ngModel"
@@ -38,6 +59,7 @@
                   type="radio"
                   name="pizzaSize"
                   [value]="size.id"
+                  (change)="sizeChange(size)"
                 />
                 {{ size.name }}
               </label>
@@ -58,6 +80,7 @@
                   type="radio"
                   name="pizzaCrust"
                   [value]="crust.id"
+                  (change)="crustChange(crust)"
                 />
                 {{ crust.name }}
               </label>
@@ -79,6 +102,7 @@
                   type="radio"
                   name="pizzaCheese"
                   [value]="cheese.id"
+                  (change)="cheeseChange(cheese)"
                 />
                 {{ cheese.name }}
               </label>
@@ -91,7 +115,12 @@
           <div class="card-body form-group checkbox pizza-checkbox">
             <div *ngFor="let meat of pizzaMeats">
               <label>
-                <input ngModel type="checkbox" [name]="meat.name" />
+                <input
+                  ngModel
+                  type="checkbox"
+                  [name]="meat.name"
+                  (change)="meatChange(meat, $event.target.checked)"
+                />
                 {{ meat.name }}
               </label>
             </div>
@@ -103,31 +132,24 @@
           <div class="card-body form-group checkbox pizza-checkbox">
             <div *ngFor="let veggie of pizzaVeggies">
               <label>
-                <input ngModel type="checkbox" [name]="veggie.name" />
+                <input
+                  ngModel
+                  type="checkbox"
+                  [name]="veggie.name"
+                  (change)="veggieChange(veggie, $event.target.checked)"
+                />
                 {{ veggie.name }}
               </label>
             </div>
-
-            <!-- <div>
-              <label>
-                <input ngModel type="checkbox" name="greenPeppers" />
-                GreenPeppers
-              </label>
-            </div> -->
-
-            <!-- <div>
-              <label>
-                <input ngModel type="checkbox" name="jalapenos" />
-                Jalapenos
-              </label>
-            </div> -->
           </div>
         </div>
-        <!-- <p>
-          {{f.value | json}}
-        </p> -->
       </div>
-      <button class="btn btn-primary" [disabled]="!f.valid">Create</button>
+      <p>
+        {{ f.value | json }}
+      </p>
+      <button class="btn btn-primary" [disabled]="!f.valid">
+        Create Pizza
+      </button>
     </div>
   </div>
 </form>

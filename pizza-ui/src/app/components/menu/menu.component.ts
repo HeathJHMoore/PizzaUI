@@ -55,6 +55,7 @@ export class MenuComponent implements OnInit {
         drink.type = 'drink';
       });
       this.drinks = drinks;
+      console.log(this.drinks);
     });
   }
 }

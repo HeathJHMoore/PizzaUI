@@ -38,3 +38,22 @@
 
   flex: 1;
 }
+.pizza-elements {
+  display: flex;
+  flex-direction: column;
+}
+.pizza-element {
+  display: flex;
+  justify-content: space-around;
+}
+.pizza-element-fi {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+
+img {
+  max-width: 50px;
+  //max-length: 150px;
+}

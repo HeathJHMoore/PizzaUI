@@ -8,27 +8,22 @@ import { PizzaElement } from 'src/app/models/pizza-element';
   styleUrls: ['./favorite-pizzas.component.scss'],
 })
 export class FavoritePizzasComponent implements OnInit {
-  pizzaElements: PizzaElement[] = [];
+  chosenElements: PizzaElement[] = [];
   pizzaSizes: PizzaElement[] = [];
   pizzaCrusts: PizzaElement[] = [];
   pizzaCheeses: PizzaElement[] = [];
   pizzaMeats: PizzaElement[] = [];
   pizzaVeggies: PizzaElement[] = [];
+  pizzaPrice: number = 0;
 
   constructor(private elementService: PizzaElementService) {}
 
   ngOnInit(): void {
-    this.elementService.getAllPizzaElements().subscribe((elements) => {
-      this.pizzaElements = elements;
-      console.log(this.pizzaElements, 'ELEMENTS');
-    });
-
     //get pizza sizes
     this.elementService.getAllPizzaElements().subscribe((elements) => {
       this.pizzaSizes = elements.filter(
         (element) => element.type == 'pizzaSize'
       );
-      console.log(this.pizzaSizes, 'SIZES');
     });
 
     // Get pizza crusts
@@ -36,7 +31,6 @@ export class FavoritePizzasComponent implements OnInit {
       this.pizzaCrusts = elements.filter(
         (element) => element.type == 'pizzaCrust'
       );
-      console.log(this.pizzaCrusts);
     });
 
     // Get pizza cheeses
@@ -44,7 +38,6 @@ export class FavoritePizzasComponent implements OnInit {
       this.pizzaCheeses = elements.filter(
         (element) => element.type == 'pizzaCheese'
       );
-      console.log(this.pizzaCheeses);
     });
 
     // Get pizza meats
@@ -52,7 +45,6 @@ export class FavoritePizzasComponent implements OnInit {
       this.pizzaMeats = elements.filter(
         (element) => element.type == 'pizzaMeat'
       );
-      console.log(this.pizzaMeats, 'MEATS');
     });
 
     // Get pizza veggies
@@ -60,14 +52,110 @@ export class FavoritePizzasComponent implements OnInit {
       this.pizzaVeggies = elements.filter(
         (element) => element.type == 'pizzaVeggie'
       );
-      console.log(this.pizzaVeggies, 'Veggies');
     });
   }
 
-  getPizzaSizes() {
-    this.pizzaSizes = this.pizzaElements.filter(
-      (element) => element.type == 'pizzaSize'
+  submit(f) {}
+
+  sizeChange(size: PizzaElement) {
+    this.chosenElements = this.chosenElements.filter(
+      (element) => element.type != 'pizzaSize'
     );
-    console.log(this.pizzaSizes, 'sizes');
+    this.chosenElements.push(size);
+
+    this.chosenElements.sort((a, b) => {
+      if (a.id > b.id) {
+        return 1;
+      } else if (a.id < b.id) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    this.calculatePrice();
+  }
+  crustChange(crust: PizzaElement) {
+    this.chosenElements = this.chosenElements.filter(
+      (element) => element.type != 'pizzaCrust'
+    );
+    this.chosenElements.push(crust);
+
+    this.chosenElements.sort((a, b) => {
+      if (a.id > b.id) {
+        return 1;
+      } else if (a.id < b.id) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    this.calculatePrice();
+  }
+  cheeseChange(cheese: PizzaElement) {
+    this.chosenElements = this.chosenElements.filter(
+      (element) => element.type != 'pizzaCheese'
+    );
+    this.chosenElements.push(cheese);
+    this.chosenElements.sort((a, b) => {
+      if (a.id > b.id) {
+        return 1;
+      } else if (a.id < b.id) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    this.calculatePrice();
+  }
+  meatChange(meat: PizzaElement, isChecked: boolean) {
+    if (isChecked) {
+      this.chosenElements.push(meat);
+    } else {
+      this.chosenElements = this.chosenElements.filter(
+        (element) => element.id != meat.id
+      );
+    }
+
+    this.chosenElements.sort((a, b) => {
+      if (a.id > b.id) {
+        return 1;
+      } else if (a.id < b.id) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+
+    this.calculatePrice();
+  }
+
+  veggieChange(veggie: PizzaElement, isChecked: boolean) {
+    if (isChecked) {
+      this.chosenElements.push(veggie);
+    } else {
+      this.chosenElements = this.chosenElements.filter(
+        (element) => element.id != veggie.id
+      );
+    }
+
+    this.chosenElements.sort((a, b) => {
+      if (a.id > b.id) {
+        return 1;
+      } else if (a.id < b.id) {
+        return -1;
+      } else {
+        return 0;
+      }
+    });
+    this.calculatePrice();
+  }
+
+  calculatePrice() {
+    let sum = 0;
+    this.chosenElements.forEach((element) => {
+      sum += element.price;
+    });
+    this.pizzaPrice = sum;
   }
 }
