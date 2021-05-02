@@ -1,6 +1,6 @@
 <!-- Shows custom pizza information -->
 
-<form #f="ngForm" (ngSumbit)="submit(f)">
+<form #f="ngForm" (ngSubmit)="submit(f)">
   <div class="container-main">
     <div class="fb-1 card">
       <div class="card-header text-center"><strong>Your Pizza</strong></div>
@@ -144,9 +144,9 @@
           </div>
         </div>
       </div>
-      <p>
+      <!-- <p>
         {{ f.value | json }}
-      </p>
+      </p> -->
       <button class="btn btn-primary" [disabled]="!f.valid">
         Create Pizza
       </button>

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { PizzaElement } from 'src/app/models/pizza-element';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CustomPizza } from 'src/app/models/custom-pizza';
 
 @Injectable({
   providedIn: 'root',
@@ -34,5 +35,9 @@ export class PizzaElementService {
       );
       return pizzaSizeArray;
     });
+  }
+
+  postPizza(pizza: CustomPizza) {
+    return this.http.post('https://localhost:44314/api/pizza', pizza);
   }
 }

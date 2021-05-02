@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PizzaElementService } from 'src/app/services/pizza-element.service';
 import { PizzaElement } from 'src/app/models/pizza-element';
+import { CustomPizza } from 'src/app/models/custom-pizza';
 
 @Component({
   selector: 'app-favorite-pizzas',
@@ -54,8 +55,6 @@ export class FavoritePizzasComponent implements OnInit {
       );
     });
   }
-
-  submit(f) {}
 
   sizeChange(size: PizzaElement) {
     this.chosenElements = this.chosenElements.filter(
@@ -149,6 +148,7 @@ export class FavoritePizzasComponent implements OnInit {
       }
     });
     this.calculatePrice();
+    console.log(this.createDescription());
   }
 
   calculatePrice() {
@@ -157,5 +157,26 @@ export class FavoritePizzasComponent implements OnInit {
       sum += element.price;
     });
     this.pizzaPrice = sum;
+  }
+
+  createDescription(): string {
+    let description = '';
+
+    this.chosenElements.forEach((element) => {
+      description += element.name + ', ';
+    });
+
+    return description.slice(0, description.length - 2);
+  }
+
+  submit(f) {
+    let pizza = new CustomPizza(
+      f.value.pizzaName,
+      this.pizzaPrice,
+      this.createDescription(),
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSa0ayEI3zJt8vZWkaCRczg7NzGL61BveTSpA&usqp=CAU'
+    );
+
+    this.elementService.postPizza(pizza).subscribe();
   }
 }
